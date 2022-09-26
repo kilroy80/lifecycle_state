@@ -24,6 +24,11 @@ abstract class LifeCycleState<T extends StatefulWidget> extends State<T>
   void onAppPause();
 
   @override
+  void onWidgetVisibility(WidgetVisibility visibility) {
+    this.visibility = visibility;
+  }
+
+  @override
   void initState() {
     super.initState();
     if (wantAppLifeCycle) {
