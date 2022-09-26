@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockLifecycleStatePlatform
-    with MockPlatformInterfaceMixin {
+class MockLifecycleStatePlatform {
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
