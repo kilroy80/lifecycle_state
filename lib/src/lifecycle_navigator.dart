@@ -21,7 +21,20 @@ class LifeCycleObserverData {
   });
 }
 
-class LifeCycleNavigator {
+abstract class ILifeCycleNavigator {
+  void addObserver(String currentName, String widgetName, LifeCycleObserver observer);
+  void removeObserver(LifeCycleObserver observer);
+  void clearObserver();
+
+  void forceWidgetPause(String widgetName);
+  void forceWidgetResume(String widgetName);
+
+  Future<T?> pushNamed<T extends Object?>(
+      BuildContext context, String routeName,
+      {Object? arguments});
+}
+
+class LifeCycleNavigator implements ILifeCycleNavigator {
   static final LifeCycleNavigator instance = LifeCycleNavigator._internal();
   factory LifeCycleNavigator() {
     return instance;
@@ -31,17 +44,21 @@ class LifeCycleNavigator {
 
   final List<LifeCycleObserverData> _observers = <LifeCycleObserverData>[];
 
+  @override
   void addObserver(String currentName, String widgetName, LifeCycleObserver observer) {
     if (_observers.where((element) => observer == element.observer).isEmpty) {
       _observers.add(LifeCycleObserverData(routerName: currentName, widgetName: widgetName, observer: observer));
     }
   }
 
+  @override
   void removeObserver(LifeCycleObserver observer) =>
       _observers.removeWhere((element) => element.observer == observer);
 
+  @override
   void clearObserver() => _observers.clear();
 
+  @override
   void forceWidgetPause(String widgetName) {
     for (var element in _observers) {
       if (widgetName == element.widgetName) {
@@ -51,6 +68,7 @@ class LifeCycleNavigator {
     }
   }
 
+  @override
   void forceWidgetResume(String widgetName) {
     for (var element in _observers) {
       if (widgetName == element.widgetName) {
@@ -60,6 +78,7 @@ class LifeCycleNavigator {
     }
   }
 
+  @override
   Future<T?> pushNamed<T extends Object?>(
       BuildContext context, String routeName,
       {Object? arguments}) {
