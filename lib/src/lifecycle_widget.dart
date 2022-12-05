@@ -24,7 +24,7 @@ abstract class LifeCycleState<T extends StatefulWidget>
   @protected
   String get routeName;
 
-  ViewModel createViewModel();
+  ViewModel? createViewModel();
 
   void onAppResume();
 
