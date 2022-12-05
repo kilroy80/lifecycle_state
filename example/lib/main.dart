@@ -22,6 +22,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends LifeCycleState<MyApp> {
 
   @override
+  ViewModel createViewModel() => MyAppViewModel();
+
+  @override
   void onAppPause() {
     debugPrint('${widget.toString()} - onAppPause');
   }
@@ -89,6 +92,9 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends LifeCycleState<SecondPage> {
 
   @override
+  ViewModel createViewModel() => SecondPageViewModel();
+
+  @override
   void onAppPause() {
     debugPrint('${widget.toString()} - onAppPause');
   }
@@ -118,6 +124,11 @@ class _SecondPageState extends LifeCycleState<SecondPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   String get routeName => '/second';
 
   @override
@@ -130,6 +141,18 @@ class _SecondPageState extends LifeCycleState<SecondPage> {
         title: const Text('Second Page'),
       ),
     );
+  }
+}
+
+class MyAppViewModel extends ViewModel {
+  @override
+  void dispose() {
+  }
+}
+
+class SecondPageViewModel extends ViewModel {
+  @override
+  void dispose() {
   }
 }
 
