@@ -19,10 +19,10 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends LifeCycleState<MyApp> {
+class _MyAppState extends LifeCycleState<MyApp, MyAppViewModel> {
 
   @override
-  ViewModel createViewModel() => MyAppViewModel();
+  MyAppViewModel createViewModel() => MyAppViewModel();
 
   @override
   void onAppPause() {
@@ -89,10 +89,10 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
-class _SecondPageState extends LifeCycleState<SecondPage> {
+class _SecondPageState extends LifeCycleState<SecondPage, SecondPageViewModel> {
 
   @override
-  ViewModel createViewModel() => SecondPageViewModel();
+  SecondPageViewModel createViewModel() => SecondPageViewModel();
 
   @override
   void onAppPause() {

@@ -13,8 +13,8 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
     extends State<T>
   with WidgetsBindingObserver, LifeCycleObserver {
 
-  late final VM? _viewModel;
-  VM? get viewModel => _viewModel;
+  late final VM _viewModel;
+  VM get viewModel => _viewModel;
 
   WidgetVisibility visibility = WidgetVisibility.visible;
 
@@ -24,7 +24,7 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
   @protected
   String get routeName;
 
-  VM? createViewModel();
+  VM createViewModel();
 
   void onAppResume();
 
@@ -55,7 +55,7 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
       WidgetsBinding.instance.removeObserver(this);
     }
     LifeCycleNavigator.instance.removeObserver(this);
-    viewModel?.dispose();
+    viewModel.dispose();
     super.dispose();
   }
 
