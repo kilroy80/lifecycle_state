@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:lifecycle_state/src/view_model.dart';
 
-abstract class ViewState<T extends StatefulWidget>
+abstract class ViewModelState<T extends StatefulWidget>
     extends State<T> {
 
   late final ViewModel _viewModel;
