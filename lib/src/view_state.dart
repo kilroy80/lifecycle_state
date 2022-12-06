@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:lifecycle_state/src/view_model.dart';
 
-abstract class ViewModelState<T extends StatefulWidget>
+abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModel>
     extends State<T> {
 
-  late final ViewModel _viewModel;
-  ViewModel get viewModel => _viewModel;
+  late final VM _viewModel;
+  VM get viewModel => _viewModel;
 
-  ViewModel createViewModel();
+  VM createViewModel();
 
   @mustCallSuper
   @override

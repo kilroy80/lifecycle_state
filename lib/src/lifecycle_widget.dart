@@ -9,12 +9,12 @@ abstract class LifeCycleStatefulWidget extends StatefulWidget {
   final String routeName;
 }
 
-abstract class LifeCycleState<T extends StatefulWidget>
+abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
     extends State<T>
   with WidgetsBindingObserver, LifeCycleObserver {
 
-  late final ViewModel? _viewModel;
-  ViewModel? get viewModel => _viewModel;
+  late final VM? _viewModel;
+  VM? get viewModel => _viewModel;
 
   WidgetVisibility visibility = WidgetVisibility.visible;
 
@@ -24,7 +24,7 @@ abstract class LifeCycleState<T extends StatefulWidget>
   @protected
   String get routeName;
 
-  ViewModel? createViewModel();
+  VM? createViewModel();
 
   void onAppResume();
 
