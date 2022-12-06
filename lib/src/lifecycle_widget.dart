@@ -38,6 +38,8 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
   @override
   void initState() {
     super.initState();
+    _viewModel = createViewModel();
+
     if (wantAppLifeCycle) {
       WidgetsBinding.instance.addObserver(this);
     }

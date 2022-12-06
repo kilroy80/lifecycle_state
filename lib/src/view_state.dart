@@ -11,6 +11,13 @@ abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModel>
 
   @mustCallSuper
   @override
+  void initState() {
+    super.initState();
+    _viewModel = createViewModel();
+  }
+
+  @mustCallSuper
+  @override
   void dispose() {
     viewModel.dispose();
     super.dispose();
