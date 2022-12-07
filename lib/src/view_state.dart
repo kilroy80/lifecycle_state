@@ -21,6 +21,5 @@ abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModel>
   void dispose() {
     viewModel.dispose();
     super.dispose();
-    debugPrint('ViewState dispose');
   }
 }
