@@ -35,6 +35,7 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
     this.visibility = visibility;
   }
 
+  @mustCallSuper
   @override
   void initState() {
     super.initState();
