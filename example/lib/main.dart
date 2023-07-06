@@ -60,11 +60,6 @@ class _MyAppState extends LifeCycleState<MyApp, MyAppViewModel> {
   bool get wantAppLifeCycle => true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -124,11 +119,6 @@ class _SecondPageState extends LifeCycleState<SecondPage, SecondPageViewModel> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   String get routeName => '/second';
 
   @override
@@ -144,13 +134,16 @@ class _SecondPageState extends LifeCycleState<SecondPage, SecondPageViewModel> {
   }
 }
 
-class MyAppViewModel extends ViewModel {
+class BaseModel {
+}
+
+class MyAppViewModel extends BaseModel with ViewModelMixin {
   @override
   void dispose() {
   }
 }
 
-class SecondPageViewModel extends ViewModel {
+class SecondPageViewModel extends BaseModel with ViewModelMixin {
   @override
   void dispose() {
   }

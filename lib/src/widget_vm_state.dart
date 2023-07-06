@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:lifecycle_state/src/view_model.dart';
+import 'package:lifecycle_state/src/view_model_mixin.dart';
 
-abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModel>
+abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModelMixin>
     extends State<T> {
 
   late final VM _viewModel;
@@ -19,7 +19,7 @@ abstract class ViewModelState<T extends StatefulWidget, VM extends ViewModel>
   @mustCallSuper
   @override
   void dispose() {
-    viewModel.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
 }

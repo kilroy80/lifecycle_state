@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifecycle_state/src/lifecycle_navigator.dart';
-import 'package:lifecycle_state/src/view_model.dart';
+import 'package:lifecycle_state/src/view_model_mixin.dart';
 
 abstract class LifeCycleStatefulWidget extends StatefulWidget {
   const LifeCycleStatefulWidget({Key? key, required this.routeName})
@@ -9,7 +9,7 @@ abstract class LifeCycleStatefulWidget extends StatefulWidget {
   final String routeName;
 }
 
-abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
+abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModelMixin>
     extends State<T>
   with WidgetsBindingObserver, LifeCycleObserver {
 
@@ -58,7 +58,7 @@ abstract class LifeCycleState<T extends StatefulWidget, VM extends ViewModel>
       WidgetsBinding.instance.removeObserver(this);
     }
     LifeCycleNavigator.instance.removeObserver(this);
-    viewModel.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
 
