@@ -90,9 +90,9 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
   @override
   Future<T?> pushNamed<T extends Object?>(
       BuildContext context, String routeName,
-      {Object? arguments}) {
+      {String? currentRouteName, Object? arguments}) {
 
-    var currentName = ModalRoute.of(context)?.settings.name;
+    var currentName = ModalRoute.of(context)?.settings.name ?? currentRouteName;
     for (var element in _observers) {
       if (currentName == element.routerName) {
         element.observer.onWidgetPause();
@@ -125,10 +125,11 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
       BuildContext context,
       String newRouteName,
       RoutePredicate predicate, {
+        String? currentRouteName,
         Object? arguments,
       }) {
 
-    var currentName = ModalRoute.of(context)?.settings.name;
+    var currentName = ModalRoute.of(context)?.settings.name ?? currentRouteName;
     for (var element in _observers) {
       if (currentName == element.routerName) {
         element.observer.onWidgetPause();
