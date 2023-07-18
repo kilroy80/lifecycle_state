@@ -31,12 +31,14 @@ abstract class ILifeCycleNavigator {
 
   Future<T?> pushNamed<T extends Object?>(
       BuildContext context,
+      String currentRouteName,
       String routeName, {
         Object? arguments
       });
 
   Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
       BuildContext context,
+      String currentRouteName,
       String newRouteName,
       RoutePredicate predicate, {
         Object? arguments,
@@ -89,8 +91,10 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
 
   @override
   Future<T?> pushNamed<T extends Object?>(
-      BuildContext context, String routeName,
-      {String? currentRouteName, Object? arguments}) {
+      BuildContext context,
+      String currentRouteName,
+      String newRouteName,
+      {Object? arguments}) {
 
     var currentName = ModalRoute.of(context)?.settings.name ?? currentRouteName;
     for (var element in _observers) {
@@ -100,7 +104,7 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
     }
 
     return Navigator.of(context)
-        .pushNamed<T>(routeName, arguments: arguments)
+        .pushNamed<T>(newRouteName, arguments: arguments)
         .then((value) {
 
       // for (var element in _observers) {
@@ -123,9 +127,9 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
   @override
   Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
       BuildContext context,
+      String currentRouteName,
       String newRouteName,
       RoutePredicate predicate, {
-        String? currentRouteName,
         Object? arguments,
       }) {
 

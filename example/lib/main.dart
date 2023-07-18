@@ -68,7 +68,7 @@ class _MyAppState extends LifeCycleState<MyApp, MyAppViewModel> {
       body: Center(
         child: MaterialButton(
           onPressed: () {
-            LifeCycleNavigator.instance.pushNamed(context, '/second');
+            LifeCycleNavigator.instance.pushNamed(context, routeName, '/second');
           },
           child: const Text('Go! Second Page'),
         ),
