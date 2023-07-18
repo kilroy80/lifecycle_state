@@ -30,8 +30,17 @@ abstract class ILifeCycleNavigator {
   void forceWidgetResume(String widgetName);
 
   Future<T?> pushNamed<T extends Object?>(
-      BuildContext context, String routeName,
-      {Object? arguments});
+      BuildContext context,
+      String routeName, {
+        Object? arguments
+      });
+
+  Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+      BuildContext context,
+      String newRouteName,
+      RoutePredicate predicate, {
+        Object? arguments,
+      });
 }
 
 class LifeCycleNavigator implements ILifeCycleNavigator {
@@ -92,6 +101,40 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
 
     return Navigator.of(context)
         .pushNamed<T>(routeName, arguments: arguments)
+        .then((value) {
+
+      // for (var element in _observers) {
+      //   if (routeName == element.routerName) {
+      //     element.observer.onWidgetPause();
+      //   }
+      // }
+
+      for (var element in _observers) {
+        if (currentName == element.routerName) {
+          element.observer.onWidgetResume();
+        }
+      }
+
+      return value;
+    });
+  }
+
+  Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+      BuildContext context,
+      String newRouteName,
+      RoutePredicate predicate, {
+        Object? arguments,
+      }) {
+
+    var currentName = ModalRoute.of(context)?.settings.name;
+    for (var element in _observers) {
+      if (currentName == element.routerName) {
+        element.observer.onWidgetPause();
+      }
+    }
+
+    return Navigator.of(context)
+        .pushNamedAndRemoveUntil<T>(newRouteName, predicate, arguments: arguments)
         .then((value) {
 
       // for (var element in _observers) {
