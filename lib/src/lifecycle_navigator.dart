@@ -109,8 +109,9 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
       //   }
       // }
 
+      debugPrint('currentName = ${currentName.toString()}');
       for (var element in _observers) {
-        if (routeName == element.routerName) {
+        if (currentName == element.routerName) {
           element.observer.onWidgetResume();
         }
       }
@@ -145,7 +146,7 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
       // }
 
       for (var element in _observers) {
-        if (newRouteName == element.routerName) {
+        if (currentName == element.routerName) {
           element.observer.onWidgetResume();
         }
       }
