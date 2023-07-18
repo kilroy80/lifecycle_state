@@ -110,7 +110,7 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
       // }
 
       for (var element in _observers) {
-        if (currentName == element.routerName) {
+        if (routeName == element.routerName) {
           element.observer.onWidgetResume();
         }
       }
@@ -119,6 +119,7 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
     });
   }
 
+  @override
   Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
       BuildContext context,
       String newRouteName,
@@ -144,7 +145,7 @@ class LifeCycleNavigator implements ILifeCycleNavigator {
       // }
 
       for (var element in _observers) {
-        if (currentName == element.routerName) {
+        if (newRouteName == element.routerName) {
           element.observer.onWidgetResume();
         }
       }
